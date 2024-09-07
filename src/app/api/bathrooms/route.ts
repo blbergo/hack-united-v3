@@ -1,21 +1,19 @@
 import { pb } from "@/utils/client";
-
-export async function GET() {
-  // Later: get list based on longitude and latitude
-  const bathrooms = await pb.collection("bathrooms").getList();
-
-  return new Response(JSON.stringify(bathrooms), {
-    headers: {
-      "content-type": "application/json",
-    },
-  });
-}
+import { sortByDistance } from "@/utils/distance";
 
 export async function POST(request: Request) {
-  const data = await request.json();
-  const bathroom = await pb.collection("bathrooms").create(data);
+  const body = await request.json();
 
-  return new Response(JSON.stringify(bathroom), {
+  const lat = body.latitude;
+  const long = body.longitude;
+  const page = body.page;
+
+  // TODO: filter by rendered lat long
+  const query = await pb.collection("bathrooms").getList(page, 50);
+
+  const bathrooms = sortByDistance(query.items, lat, long);
+
+  return new Response(JSON.stringify(bathrooms), {
     headers: {
       "content-type": "application/json",
     },
