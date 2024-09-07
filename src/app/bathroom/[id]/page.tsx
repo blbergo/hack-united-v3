@@ -12,6 +12,8 @@ import { Fredoka } from "next/font/google";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+import "rc-slider/assets/index.css";
+
 const fredoka = Fredoka({
   weight: ["400", "700"],
   subsets: ["latin"],
@@ -100,8 +102,14 @@ export default function Page({ params }: { params: { id: string } }) {
               {bathroom.number_of_urinals}
             </p>
           </span>
-          <Button variant={BUTTON_VARIANTS.SOLID} className="mt-[10px] p-3 font-bold">
-           Leave A Review
+          <Button
+            onclick={() => {
+              router.push(`/bathroom/create/${bathroom.id}/review`);
+            }}
+            variant={BUTTON_VARIANTS.SOLID}
+            className="mt-[10px] p-3 font-bold"
+          >
+            Leave A Review
           </Button>
         </>
       )}

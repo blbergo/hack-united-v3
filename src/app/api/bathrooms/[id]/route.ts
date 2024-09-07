@@ -10,6 +10,8 @@ export async function GET(
     .collection("bathrooms")
     .getFirstListItem(`id="${id}"`);
 
+  console.log(bathroom);
+
   return new Response(JSON.stringify(bathroom), {
     headers: {
       "content-type": "application/json",
@@ -31,3 +33,5 @@ export async function PUT(
     },
   });
 }
+
+export const revalidate = 0;
