@@ -13,6 +13,12 @@ const config: Config = {
         secondary: "#D6B992",
         grey: "#666666",
       },
+      backgroundImage: {
+        "landing": "url('../assets/landing.png')",
+      },
+      fontFamily: {
+        fredoka: ["Fredoka", "sans-serif"],
+      },
     },
   },
   plugins: [],
