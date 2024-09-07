@@ -2,7 +2,11 @@ import { useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export function Address() {
+interface AddressProps {
+  setExportedAddress: (address: string) => void;
+}
+
+export function Address({ setExportedAddress }: AddressProps) {
   const geocoding = useMapsLibrary("geocoding");
   const params = useSearchParams();
   const lat = Number(params.get("latitude") || "");
@@ -24,6 +28,11 @@ export function Address() {
         (results, status) => {
           if (status === "OK" && results) {
             setAddress(
+              results[0].address_components[0].short_name +
+                " " +
+                results[0].address_components[1].short_name
+            );
+            setExportedAddress(
               results[0].address_components[0].short_name +
                 " " +
                 results[0].address_components[1].short_name

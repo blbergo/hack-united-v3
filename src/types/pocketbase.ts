@@ -55,10 +55,14 @@ export type BathroomsRecord<Tammentities = unknown, Tstocking = unknown> = {
 	ammentities?: null | Tammentities
 	comments?: RecordIdString[]
 	dryer_type?: BathroomsDryerTypeOptions
+	has_men?: boolean
+	has_tp?: boolean
+	has_women?: boolean
 	is_accessible?: boolean
 	is_private?: boolean
 	latitude?: number
 	longitude?: number
+	name?: string
 	number_of_stalls?: number
 	number_of_urinals?: number
 	overall_score?: number

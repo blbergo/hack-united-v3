@@ -14,6 +14,12 @@ import { Fredoka } from "next/font/google";
 import { Button, BUTTON_VARIANTS } from "@/components/Button";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import {
+  BathroomsDryerTypeOptions,
+  BathroomsRecord,
+  BathroomsStatusOptions,
+  BathroomsUrinalTypeOptions,
+} from "@/types/pocketbase";
 
 const fredoka = Fredoka({
   weight: ["400", "700"],
@@ -37,6 +43,42 @@ export default function Page() {
   const [urinalCount, setUrinalCount] = useState(0);
   const [urinalType, setUrinalType] = useState("NONE");
   const [cleanliness, setCleanliness] = useState(0);
+  const [address, setAddress] = useState("");
+
+  const submit = async () => {
+    const data: BathroomsRecord = {
+      name: address,
+      visitor_count: 1,
+      overall_score: rating,
+      is_accessible: accessibility,
+      has_women: hasWomen,
+      has_men: hasMen,
+      has_tp: hasTp,
+      is_private: isPrivate,
+      dryer_type:
+        BathroomsDryerTypeOptions[
+          dryerType as keyof typeof BathroomsDryerTypeOptions
+        ],
+      number_of_stalls: toiletCount,
+      number_of_urinals: urinalCount,
+      urinal_type:
+        BathroomsUrinalTypeOptions[
+          urinalType as keyof typeof BathroomsUrinalTypeOptions
+        ],
+      status: BathroomsStatusOptions.OPEN,
+      latitude: Number(params.get("latitude")),
+      longitude: Number(params.get("longitude")),
+    };
+
+    const req = await fetch("/api/bathrooms/create", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+
+    if (req.ok) {
+      router.back();
+    }
+  };
 
   return (
     <div
@@ -45,7 +87,7 @@ export default function Page() {
       <button className="mt-[10px]" onClick={() => router.back()}>
         <Image src="/icons/x.png" alt="back" width={24} height={24} />
       </button>
-      <Address />
+      <Address setExportedAddress={setAddress} />
       <span className="flex flex-row gap-x-4 mt-[17px]">
         {[1, 2, 3, 4, 5].map((index) => (
           <div
@@ -156,6 +198,7 @@ export default function Page() {
         <Button
           className="mt-[20px] w-fit p-3 font-bold"
           variant={BUTTON_VARIANTS.SOLID}
+          onclick={submit}
         >
           Submit
         </Button>
