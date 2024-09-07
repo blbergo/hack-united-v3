@@ -5,7 +5,6 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const id = params.id;
-  console.log(id);
 
   const bathroom = await pb
     .collection("bathrooms")

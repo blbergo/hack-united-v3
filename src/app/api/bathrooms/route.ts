@@ -10,7 +10,6 @@ export async function POST(request: Request) {
 
   // TODO: filter by rendered lat long
   const query = await pb.collection("bathrooms").getList(page, 50);
-
   const bathrooms = sortByDistance(query.items, lat, long);
 
   return new Response(JSON.stringify(bathrooms), {
