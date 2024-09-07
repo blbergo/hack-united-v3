@@ -68,6 +68,7 @@ export default function Page() {
       status: BathroomsStatusOptions.OPEN,
       latitude: Number(params.get("latitude")),
       longitude: Number(params.get("longitude")),
+      cleanliness: CLEANLINESS_LEVELS[cleanliness],
     };
 
     const req = await fetch("/api/bathrooms/create", {

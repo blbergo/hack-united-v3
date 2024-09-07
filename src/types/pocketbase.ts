@@ -53,6 +53,7 @@ export enum BathroomsDryerTypeOptions {
 }
 export type BathroomsRecord<Tammentities = unknown, Tstocking = unknown> = {
 	ammentities?: null | Tammentities
+	cleanliness?: string
 	comments?: RecordIdString[]
 	dryer_type?: BathroomsDryerTypeOptions
 	has_men?: boolean
