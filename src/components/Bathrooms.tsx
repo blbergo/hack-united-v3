@@ -1,5 +1,5 @@
 import useBathrooms from "@/hooks/useBathrooms";
-import { AdvancedMarker, Marker, Pin } from "@vis.gl/react-google-maps";
+import { AdvancedMarker, Pin } from "@vis.gl/react-google-maps";
 
 export function Bathrooms({
   latitude,

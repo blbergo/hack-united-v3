@@ -65,6 +65,7 @@ export type BathroomsRecord<Tammentities = unknown, Tstocking = unknown> = {
 	status?: BathroomsStatusOptions
 	stocking?: null | Tstocking
 	urinal_type?: BathroomsUrinalTypeOptions
+	visitor_count?: number
 	visitors?: RecordIdString[]
 }
 

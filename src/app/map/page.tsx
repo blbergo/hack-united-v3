@@ -1,6 +1,7 @@
 "use client";
 
 import { Bathrooms } from "@/components/Bathrooms";
+import { Heatmap } from "@/components/Heatmap";
 import { LocationMarker } from "@/components/LocationMarker";
 import { Map } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
@@ -39,6 +40,12 @@ export default function Page() {
           defaultZoom={18}
           mapId={"4e4faea7d916d470"}
         >
+          <Heatmap
+            latitude={location.lat}
+            longitude={location.lng}
+            radius={20}
+            opacity={0.6}
+          />
           <LocationMarker latitude={location.lat} longitude={location.lng} />
           <Bathrooms latitude={location.lat} longitude={location.lng} />
         </Map>
