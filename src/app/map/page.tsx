@@ -1,11 +1,14 @@
 "use client";
 
 import { Bathrooms } from "@/components/Bathrooms";
+import { Button, BUTTON_VARIANTS } from "@/components/Button";
 import { Directions } from "@/components/Directions";
 import { Heatmap } from "@/components/Heatmap";
 import { LocationMarker } from "@/components/LocationMarker";
 import { Map } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Page() {
   const [location, setLocation] = useState<null | {
@@ -34,23 +37,42 @@ export default function Page() {
   }, [location]);
 
   return (
-    <div className="h-screen w-full">
+    <div className="h-screen w-full flex flex-col items-center">
       {location ? (
-        <Map
-          defaultCenter={location}
-          defaultZoom={19}
-          mapId={"4e4faea7d916d470"}
-        >
-          <Heatmap
-            latitude={location.lat}
-            longitude={location.lng}
-            radius={40}
-            opacity={0.6}
-          />
-          <LocationMarker latitude={location.lat} longitude={location.lng} />
-          <Bathrooms latitude={location.lat} longitude={location.lng} />
-          <Directions latitude={location.lat} longitude={location.lng} />
-        </Map>
+        <>
+          <Map
+            defaultCenter={location}
+            defaultZoom={19}
+            disableDefaultUI
+            mapId={"4e4faea7d916d470"}
+          >
+            <Heatmap
+              latitude={location.lat}
+              longitude={location.lng}
+              radius={40}
+              opacity={0.6}
+            />
+            <LocationMarker latitude={location.lat} longitude={location.lng} />
+            <Bathrooms latitude={location.lat} longitude={location.lng} />
+            <Directions latitude={location.lat} longitude={location.lng} />
+          </Map>
+          {/* TODO: add a click-to-create at position feature */}
+          <Link
+            href={`/bathroom/create?latitude=${location.lat}&longitude=${location.lng}`}
+          >
+            <Button
+              variant={BUTTON_VARIANTS.OUTLINE}
+              className="z-50 fixed p-[10px] bottom-5 shadow-lg"
+            >
+              <Image
+                src="/icons/plus.png"
+                alt="add a bathroom"
+                width={26}
+                height={26}
+              />
+            </Button>
+          </Link>
+        </>
       ) : (
         "Loading..."
       )}
