@@ -9,7 +9,7 @@ export default function Private({
     <img
       onClick={onclick}
       src={
-        filled
+        !filled
           ? "/icons/primary/filled/private.png"
           : "/icons/primary/outlined/private.png"
       }
