@@ -1,0 +1,15 @@
+<svg width="42" height="45" viewBox="0 0 42 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="brick-wall 135" clip-path="url(#clip0_7231_5252)">
+<rect width="42" height="44" transform="translate(0 0.5)" fill="#A17063"/>
+<g id="Page-1">
+<g id="brick-wall">
+<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M0 0.5H42V44.5H0V0.5ZM1 1.5H41V21.5H1V1.5ZM0 23.5H20V43.5H0V23.5ZM22 23.5H42V43.5H22V23.5Z" fill="#BB8F83"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_7231_5252">
+<rect width="42" height="44" fill="white" transform="translate(0 0.5)"/>
+</clipPath>
+</defs>
+</svg>
