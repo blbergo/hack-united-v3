@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.55.0",
     "@vis.gl/react-google-maps": "^1.1.2",
     "next": "14.2.8",
     "pocketbase": "^0.21.5",
