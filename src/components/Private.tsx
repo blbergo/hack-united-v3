@@ -1,4 +1,4 @@
-export default function Accessibility({
+export default function Private({
   filled = false,
   onclick,
 }: {
@@ -10,8 +10,8 @@ export default function Accessibility({
       onClick={onclick}
       src={
         filled
-          ? "/icons/primary/filled/accessibility.png"
-          : "/icons/primary/outlined/accessibility.png"
+          ? "/icons/primary/filled/private.png"
+          : "/icons/primary/outlined/private.png"
       }
       alt="accessibilty"
       width={20}
