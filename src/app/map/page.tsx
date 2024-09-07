@@ -9,12 +9,15 @@ import { Map } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Filter from "@/components/Filter";
 
 export default function Page() {
   const [location, setLocation] = useState<null | {
     lat: number;
     lng: number;
   }>(null);
+
+  const [showFilter, setShowFilter] = useState(false);
 
   useEffect(() => {
     if ("geolocation" in navigator && !location) {
@@ -40,6 +43,20 @@ export default function Page() {
     <div className="h-screen w-full flex flex-col items-center">
       {location ? (
         <>
+          <Image
+            onClick={() => setShowFilter(!showFilter)}
+            src={"/icons/list.png"}
+            alt="list"
+            width={40}
+            height={40}
+            style={{
+              position: "absolute",
+              top: "10px",
+              left: "10px",
+              zIndex: 3,
+            }}
+          />
+          {showFilter && <Filter setShowFilter={setShowFilter} />}
           <Map
             defaultCenter={location}
             defaultZoom={19}

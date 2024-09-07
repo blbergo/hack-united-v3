@@ -3,6 +3,7 @@ interface ButtonProps {
   children: React.ReactNode;
   className?: string;
   onclick?: () => void;
+  style?: React.CSSProperties;
 }
 
 export enum BUTTON_VARIANTS {
@@ -10,9 +11,19 @@ export enum BUTTON_VARIANTS {
   SOLID = "bg-primary text-white",
 }
 
-export function Button({ variant, children, className, onclick }: ButtonProps) {
+export function Button({
+  variant,
+  children,
+  className,
+  onclick,
+  style,
+}: ButtonProps) {
   return (
-    <button onClick={onclick} className={`${variant} ${className} rounded-lg`}>
+    <button
+      style={style}
+      onClick={onclick}
+      className={`${variant} ${className} rounded-lg`}
+    >
       {children}
     </button>
   );
