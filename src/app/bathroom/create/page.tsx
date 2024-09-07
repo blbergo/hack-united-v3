@@ -20,6 +20,8 @@ const fredoka = Fredoka({
   subsets: ["latin"],
 });
 
+const CLEANLINESS_LEVELS = ["Dangerous", "Smelly", "Clean", "Bougie"];
+
 export default function Page() {
   const router = useRouter();
   const params = useSearchParams();
@@ -34,6 +36,7 @@ export default function Page() {
   const [toiletCount, setToiletCount] = useState(1);
   const [urinalCount, setUrinalCount] = useState(0);
   const [urinalType, setUrinalType] = useState("NONE");
+  const [cleanliness, setCleanliness] = useState(0);
 
   return (
     <div
@@ -125,7 +128,38 @@ export default function Page() {
         </>
       )}
       <p className="font-bold text-xl text-black">Cleanliness</p>
-      <Slider min={0} max={3} />
+      <span className="w-full flex flex-row justify-center">
+        <p className="bg-primary text-secondary font-bold text-lg p-2 rounded-lg">
+          {CLEANLINESS_LEVELS[cleanliness]}
+        </p>
+      </span>
+      <Slider
+        onChange={(value) => setCleanliness(value as number)}
+        min={0}
+        max={3}
+        styles={{
+          track: {
+            backgroundColor: "#A17063",
+          },
+          rail: {
+            backgroundColor: "#D6B992",
+          },
+          handle: {
+            backgroundColor: "#A17063",
+          },
+        }}
+        dotStyle={{
+          backgroundColor: "#A17063",
+        }}
+      />
+      <span className="flex flex-row w-full justify-center">
+        <Button
+          className="mt-[20px] w-fit p-3 font-bold"
+          variant={BUTTON_VARIANTS.SOLID}
+        >
+          Submit
+        </Button>
+      </span>
     </div>
   );
 }
