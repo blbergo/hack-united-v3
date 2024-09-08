@@ -13,14 +13,12 @@ export function Bathrooms({
 }) {
   const query = useBathrooms(latitude, longitude);
   const router = useRouter();
-  console.log(query.data);
   return (
     <>
       {query.isSuccess && query.data && (
         <>
           {query.data
             .filter((bathroom) => {
-              console.log(filters);
               if (filters["reviewScore"]) {
                 if (bathroom.overall_score < filters["reviewScore"]) {
                   return false;

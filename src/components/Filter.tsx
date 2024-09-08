@@ -27,7 +27,6 @@ const Filter = ({
   const CLEANLINESS_LEVELS = ["Dangerous", "Smelly", "Clean", "Bougie"];
 
   const handleFilter = () => {
-    console.log("Filtering");
     const filter = {};
     if (hasMale) {
       filter["hasMale"] = hasMale;
