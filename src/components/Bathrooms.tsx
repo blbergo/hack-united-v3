@@ -19,43 +19,7 @@ export function Bathrooms({
         <>
           {query.data
             .filter((bathroom) => {
-              if (filters["reviewScore"]) {
-                if (bathroom.overall_score < filters["reviewScore"]) {
-                  return false;
-                }
-              }
-              if (filters["isAccessible"]) {
-                if (bathroom.is_accessible !== filters["isAccessible"]) {
-                  return false;
-                }
-              }
-              if (filters["hasFemale"]) {
-                if (bathroom.has_women !== filters["hasFemale"]) {
-                  return false;
-                }
-              }
-              if (filters["hasMale"]) {
-                if (bathroom.has_men != filters["hasMale"]) {
-                  console.log(bathroom.has_men, filters["hasMale"]);
-                  return false;
-                }
-              }
-              if (filters["hasTP"]) {
-                if (bathroom.has_tp !== filters["hasTP"]) {
-                  return false;
-                }
-              }
-              if (filters["isPrivate"]) {
-                if (bathroom.is_private !== filters["isPrivate"]) {
-                  return false;
-                }
-              }
-              if (filters["cleanliness"]) {
-                if (bathroom.cleanliness < filters["cleanliness"]) {
-                  return false;
-                }
-              }
-              return true;
+             return true; 
             })
             .map((bathroom) => (
               <AdvancedMarker

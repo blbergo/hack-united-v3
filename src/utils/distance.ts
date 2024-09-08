@@ -1,4 +1,4 @@
-import { BathroomsResponse } from "@/types/pocketbase-types";
+import { BathroomsResponse } from "@/types/pocketbase";
 
 export const calculateEuclidianDistance = (
   lat1: number,

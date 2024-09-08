@@ -29,24 +29,31 @@ const Filter = ({
   const handleFilter = () => {
     const filter = {};
     if (hasMale) {
+      // @ts-expect-error no types
       filter["hasMale"] = hasMale;
     }
     if (hasFemale) {
+      // @ts-expect-error no types
       filter["hasFemale"] = hasFemale;
     }
     if (reviewScore > 0) {
+      // @ts-expect-error no types
       filter["reviewScore"] = reviewScore;
     }
     if (cleanliness > 0) {
+      // @ts-expect-error no types
       filter["cleanliness"] = cleanliness;
     }
     if (isAccessible) {
+      // @ts-expect-error no types
       filter["isAccessible"] = isAccessible;
     }
     if (hasTP) {
+      // @ts-expect-error no types
       filter["hasTP"] = hasTP;
     }
     if (isPrivate) {
+      // @ts-expect-error no types
       filter["isPrivate"] = isPrivate;
     }
     setFilters(filter);

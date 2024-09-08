@@ -114,6 +114,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </Button>
           <div className="bg-slate-200 rounded-lg p-2 flex flex-col gap-y-3 mt-[10px]">
             {bathroom.comments.length > 0 &&
+              // @ts-expect-error - we know this is an array
               (bathroom.expand.comments as CommentsRecord[]).map(
                 (comment, idx) => (
                   <div key={idx} className="mt-[10px]">

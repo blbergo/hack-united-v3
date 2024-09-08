@@ -1,4 +1,4 @@
-import { BathroomsResponse } from "@/types/pocketbase-types";
+import { BathroomsResponse } from "@/types/pocketbase";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useBathrooms(latitude: number, longitude: number) {
