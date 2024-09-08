@@ -8,8 +8,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="w-full h-screen bg-white">
-        <Providers>{children}</Providers>
+      <body className="w-full h-screen bg-black flex flex-col items-center justify-center">
+        <div className="w-[375px] max-w-[375px]">
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   );
