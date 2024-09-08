@@ -18,7 +18,7 @@ export default function Page() {
   }>(null);
 
   const [showFilter, setShowFilter] = useState(false);
-
+  const [filters, setFilters] = useState({});
   useEffect(() => {
     if ("geolocation" in navigator && !location) {
       // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
@@ -56,7 +56,9 @@ export default function Page() {
               zIndex: 3,
             }}
           />
-          {showFilter && <Filter setShowFilter={setShowFilter} />}
+          {showFilter && (
+            <Filter setShowFilter={setShowFilter} setFilters={setFilters} />
+          )}
           <Map
             defaultCenter={location}
             defaultZoom={19}
@@ -70,7 +72,11 @@ export default function Page() {
               opacity={0.6}
             />
             <LocationMarker latitude={location.lat} longitude={location.lng} />
-            <Bathrooms latitude={location.lat} longitude={location.lng} />
+            <Bathrooms
+              latitude={location.lat}
+              longitude={location.lng}
+              filters={filters}
+            />
             <Directions latitude={location.lat} longitude={location.lng} />
           </Map>
           {/* TODO: add a click-to-create at position feature */}

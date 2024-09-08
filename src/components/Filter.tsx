@@ -11,8 +11,10 @@ import Slider from "rc-slider";
 
 const Filter = ({
   setShowFilter,
+  setFilters,
 }: {
   setShowFilter: (val: boolean) => void;
+  setFilters: (val: object) => void;
 }) => {
   const [reviewScore, setReviewScore] = useState(0);
   const [isAccessible, setIsAccessible] = useState(false);
@@ -26,6 +28,29 @@ const Filter = ({
 
   const handleFilter = () => {
     console.log("Filtering");
+    const filter = {};
+    if (hasMale) {
+      filter["hasMale"] = hasMale;
+    }
+    if (hasFemale) {
+      filter["hasFemale"] = hasFemale;
+    }
+    if (reviewScore > 0) {
+      filter["reviewScore"] = reviewScore;
+    }
+    if (cleanliness > 0) {
+      filter["cleanliness"] = cleanliness;
+    }
+    if (isAccessible) {
+      filter["isAccessible"] = isAccessible;
+    }
+    if (hasTP) {
+      filter["hasTP"] = hasTP;
+    }
+    if (isPrivate) {
+      filter["isPrivate"] = isPrivate;
+    }
+    setFilters(filter);
     setShowFilter(false);
   };
   return (
@@ -56,7 +81,7 @@ const Filter = ({
           left: "50%",
           transform: "translate(-50%,0)",
           zIndex: 5,
-          minHeight: "220px",
+          minHeight: "250px",
           width: "340px",
           borderRadius: "20px",
           background: "white",
