@@ -8,7 +8,9 @@ export async function GET(
 
   const bathroom = await pb
     .collection("bathrooms")
-    .getFirstListItem(`id="${id}"`);
+    .getFirstListItem(`id="${id}"`, { expand: "comments" });
+
+  console.log(bathroom);
 
   return new Response(JSON.stringify(bathroom), {
     headers: {
@@ -31,3 +33,5 @@ export async function PUT(
     },
   });
 }
+
+export const revalidate = 0;
