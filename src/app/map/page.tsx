@@ -19,6 +19,9 @@ export default function Page() {
 
   const [showFilter, setShowFilter] = useState(false);
   const [filters, setFilters] = useState({});
+  const [showHeatmap, setShowHeatmap] = useState(false);
+  const [showDirections, setShowDirections] = useState(false);
+
   useEffect(() => {
     if ("geolocation" in navigator && !location) {
       // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
@@ -65,36 +68,56 @@ export default function Page() {
             disableDefaultUI
             mapId={"4e4faea7d916d470"}
           >
-            <Heatmap
-              latitude={location.lat}
-              longitude={location.lng}
-              radius={40}
-              opacity={0.6}
-            />
+            {showHeatmap && (
+              <Heatmap
+                latitude={location.lat}
+                longitude={location.lng}
+                radius={40}
+                opacity={0.6}
+              />
+            )}
             <LocationMarker latitude={location.lat} longitude={location.lng} />
             <Bathrooms
               latitude={location.lat}
               longitude={location.lng}
               filters={filters}
             />
-            <Directions latitude={location.lat} longitude={location.lng} />
+            {showDirections && (
+              <Directions latitude={location.lat} longitude={location.lng} />
+            )}
           </Map>
           {/* TODO: add a click-to-create at position feature */}
-          <Link
-            href={`/bathroom/create?latitude=${location.lat}&longitude=${location.lng}`}
-          >
+          <span className="fixed bottom-8 flex flex-row gap-x-3">
             <Button
               variant={BUTTON_VARIANTS.OUTLINE}
-              className="z-50 fixed p-[10px] bottom-5 shadow-lg"
+              className="z-50 p-[10px]"
+              onclick={() => setShowDirections(!showDirections)}
             >
-              <Image
-                src="/icons/plus.png"
-                alt="add a bathroom"
-                width={26}
-                height={26}
-              />
+              Toggle Directions
             </Button>
-          </Link>
+            <Link
+              href={`/bathroom/create?latitude=${location.lat}&longitude=${location.lng}`}
+            >
+              <Button
+                variant={BUTTON_VARIANTS.OUTLINE}
+                className="z-50 p-[10px] shadow-lg"
+              >
+                <Image
+                  src="/icons/plus.png"
+                  alt="add a bathroom"
+                  width={26}
+                  height={26}
+                />
+              </Button>
+            </Link>
+            <Button
+              variant={BUTTON_VARIANTS.OUTLINE}
+              className="z-50 shadow-lg p-[10px]"
+              onclick={() => setShowHeatmap(!showHeatmap)}
+            >
+              Toggle Heatmap
+            </Button>
+          </span>
         </>
       ) : (
         "Loading..."
