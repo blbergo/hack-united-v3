@@ -9,6 +9,8 @@ import Private from "./Private";
 import { Button, BUTTON_VARIANTS } from "./Button";
 import Slider from "rc-slider";
 
+import "rc-slider/assets/index.css";
+
 const Filter = ({
   setShowFilter,
   setFilters,
@@ -40,10 +42,6 @@ const Filter = ({
       // @ts-expect-error no types
       filter["reviewScore"] = reviewScore;
     }
-    if (cleanliness > 0) {
-      // @ts-expect-error no types
-      filter["cleanliness"] = cleanliness;
-    }
     if (isAccessible) {
       // @ts-expect-error no types
       filter["isAccessible"] = isAccessible;
@@ -56,6 +54,10 @@ const Filter = ({
       // @ts-expect-error no types
       filter["isPrivate"] = isPrivate;
     }
+
+    // @ts-expect-error no types
+    filter["cleanliness"] = cleanliness;
+
     setFilters(filter);
     setShowFilter(false);
   };
@@ -101,7 +103,6 @@ const Filter = ({
           />
           <Women filled={hasFemale} onclick={() => setHasFemale(!hasFemale)} />
           <Men filled={hasMale} onclick={() => setHasMale(!hasMale)} />
-          <TP filled={hasTP} onclick={() => setHasTP(!hasTP)} />
           <Private
             filled={isPrivate}
             onclick={() => setIsPrivate(!isPrivate)}
