@@ -76,6 +76,7 @@ export type BathroomsRecord<Tammentities = unknown, Tstocking = unknown> = {
 
 export type CommentsRecord = {
 	author?: RecordIdString
+	field?: RecordIdString
 	like_count?: number
 	message?: string
 }

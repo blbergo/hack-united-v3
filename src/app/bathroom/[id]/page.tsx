@@ -8,6 +8,7 @@ import Star from "@/components/Star";
 import TP from "@/components/Tp";
 import Women from "@/components/Women";
 import useBathroom from "@/hooks/useBathroom";
+import { CommentsRecord } from "@/types/pocketbase";
 import { Fredoka } from "next/font/google";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -38,7 +39,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <div className={`${fredoka.className} w-full h-screen bg-white p-5`}>
-      <button className="mt-[10px]" onClick={() => router.back()}>
+      <button className="mt-[10px]" onClick={() => router.push("/map")}>
         <Image src="/icons/x.png" alt="back" width={24} height={24} />
       </button>
       {query.isSuccess && bathroom && (
@@ -111,6 +112,18 @@ export default function Page({ params }: { params: { id: string } }) {
           >
             Leave A Review
           </Button>
+          <div className="bg-slate-200 rounded-lg p-2 flex flex-col gap-y-3 mt-[10px]">
+            {bathroom.comments.length > 0 &&
+              (bathroom.expand.comments as CommentsRecord[]).map(
+                (comment, idx) => (
+                  <div key={idx} className="mt-[10px]">
+                    <p className="text-black font-bold text-xl">
+                      &quot;{comment.message}&quot; - Bryan Bergo
+                    </p>
+                  </div>
+                )
+              )}
+          </div>
         </>
       )}
     </div>

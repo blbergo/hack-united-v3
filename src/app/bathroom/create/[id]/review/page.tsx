@@ -14,10 +14,7 @@ import { useState } from "react";
 
 import "rc-slider/assets/index.css";
 import { BathroomsRecord, CommentsRecord } from "@/types/pocketbase";
-import { pb } from "@/utils/client";
 import { useRouter } from "next/navigation";
-import { useQueryClient } from "@tanstack/react-query";
-import { revalidatePath } from "next/cache";
 
 const CLEANLINESS_LEVELS = ["Dangerous", "Smelly", "Clean", "Bougie"];
 
@@ -59,6 +56,17 @@ export default function Page({ params }: { params: { id: string } }) {
   }
 
   const submit = async () => {
+    const commentData: CommentsRecord = {
+      message: comment,
+    };
+
+    const createComment = await fetch(`/api/comments`, {
+      method: "POST",
+      body: JSON.stringify(commentData),
+    });
+
+    const res = (await createComment.json()) as CommentsRecord;
+    
     const data: BathroomsRecord = {
       overall_score: rating,
       is_accessible: accessibility,
@@ -68,10 +76,8 @@ export default function Page({ params }: { params: { id: string } }) {
       is_private: isPrivate,
       cleanliness: CLEANLINESS_LEVELS[cleanliness],
       visitor_count: bathroom ? bathroom.visitor_count + 1 : 1,
-    };
-    const commentData: CommentsRecord = {
-      message: comment,
-      author: pb.authStore.token,
+      // @ts-expect-error - we know this is a string
+      comments: bathroom ? [...bathroom.comments, res.id] : [res.id],
     };
 
     const updateBathroom = await fetch(`/api/bathrooms/${params.id}`, {
@@ -79,13 +85,7 @@ export default function Page({ params }: { params: { id: string } }) {
       body: JSON.stringify(data),
     });
 
-    const createComment = await fetch(`/api/comments`, {
-      method: "POST",
-      body: JSON.stringify(commentData),
-    });
-
     if (updateBathroom.ok && createComment.ok) {
-      
       router.replace(`/bathroom/${params.id}`);
     }
   };

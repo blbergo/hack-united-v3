@@ -8,7 +8,7 @@ export async function GET(
 
   const bathroom = await pb
     .collection("bathrooms")
-    .getFirstListItem(`id="${id}"`);
+    .getFirstListItem(`id="${id}"`, { expand: "comments" });
 
   console.log(bathroom);
 
